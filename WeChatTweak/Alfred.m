@@ -8,6 +8,7 @@
 
 #import "Alfred.h"
 #import "WeChatTweak.h"
+#import "TKMessageManager.h"
 
 @interface AlfredManager()
 
@@ -214,6 +215,35 @@
                 }
                 return [GCDWebServerDataResponse responseWithJSONObject:@{@"chatLogs": chatLogItems, @"hasMore": @(hasMore == '1')}];
         }];
+    [self.server addHandlerForMethod:@"POST" path:@"/wechat/send" requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse * _Nullable(__kindof GCDWebServerRequest * _Nonnull request) {
+        
+        // Extracting parameters from the query.
+        NSString *userId = request.query[@"userId"];
+        
+        // If userId has content.
+        if (userId && userId.length > 0) {
+            NSString *content = request.query[@"content"];
+            
+            // Access the message service.
+            FFProcessReqsvrZZ *messageService = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("FFProcessReqsvrZZ")];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (content && content.length > 0) {
+                    NSString *currentUserName = [objc_getClass("CUtility") GetCurrentUserName];
+                    [messageService FFProcessTReqZZ:currentUserName
+                                          toUsrName:userId
+                                            msgText:content
+                                         atUserList:nil];
+                    [[TKMessageManager shareManager] clearUnRead:userId];
+                    
+                }
+            });
+            
+            return [GCDWebServerDataResponse responseWithJSONObject:@{@"sent": @1}];
+        }
+        
+        return [GCDWebServerResponse responseWithStatusCode:404];
+    }];
+
     [self.server startWithOptions:@{
         GCDWebServerOption_Port: @(48065),
         GCDWebServerOption_BindToLocalhost: @(YES)

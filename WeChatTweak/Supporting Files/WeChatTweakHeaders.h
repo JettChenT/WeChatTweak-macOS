@@ -49,22 +49,47 @@ typedef NS_ENUM(unsigned int, MessageDataType) {
 
 @end
 
-@interface MessageData: NSObject
-
-@property(nonatomic) MessageDataType messageType;
-@property(nonatomic) unsigned int msgStatus;
-@property(nonatomic) long long mesSvrID;
-@property(retain, nonatomic) NSString *toUsrName;
+@interface MessageData : NSObject
+- (id)initWithMsgType:(long long)arg1;
 @property(retain, nonatomic) NSString *fromUsrName;
+@property(retain, nonatomic) NSString *toUsrName;
 @property(retain, nonatomic) NSString *msgContent;
-@property(nonatomic) unsigned int msgCreateTime;
-@property(nonatomic) unsigned int mesLocalID;
-
-- (instancetype)initWithMsgType:(long long)arg1;
+@property(retain, nonatomic) NSString *msgPushContent;
+@property(retain, nonatomic) NSString *realChatUserName;
+@property(retain, nonatomic) NSString *m_nsAppName;
+@property(retain, nonatomic) NSString *m_nsSourceDisplayname;
+@property(nonatomic) int messageType;
+@property(nonatomic) int msgStatus;
+@property(nonatomic) int msgCreateTime;
+@property(nonatomic) int mesLocalID;
+@property(nonatomic) long long mesSvrID;
+@property(retain, nonatomic) NSString *msgVoiceText;
+@property(copy, nonatomic) NSString *m_nsEmoticonMD5;
+- (BOOL)isChatRoomMessage;
+- (NSString *)groupChatSenderDisplayName;
+- (id)getRealMessageContent;
+- (id)getChatRoomUsrName;
 - (BOOL)isSendFromSelf;
-- (id)getChatNameForCurMsg;
+- (BOOL)isCustomEmojiMsg;
+- (BOOL)isImgMsg;
+- (BOOL)isVideoMsg;
+- (BOOL)isVoiceMsg;
+- (BOOL)canForward;
+- (BOOL)IsPlayingSound;
+- (id)summaryString:(BOOL)arg1;
+- (BOOL)isEmojiAppMsg;
+- (BOOL)isAppBrandMsg;
+- (BOOL)IsUnPlayed;
+- (void)SetPlayed;
+@property(retain, nonatomic) NSString *m_nsTitle;
+- (id)originalImageFilePath;
+@property(retain, nonatomic) NSString *m_nsVideoPath;
+@property(retain, nonatomic) NSString *m_nsFilePath;
+@property(retain, nonatomic) NSString *m_nsAppMediaUrl;
+@property(nonatomic) MessageData *m_refMessageData;
+@property(nonatomic) unsigned int m_uiDownloadStatus;
+- (void)SetPlayingSoundStatus:(BOOL)arg1;
 - (id)savingImageFileNameWithLocalID;
-
 @end
 
 @interface ReaderWrap : NSObject
@@ -190,11 +215,31 @@ typedef NS_ENUM(unsigned int, MessageDataType) {
 - (void)notifyDelMsgOnMainThread:(id)arg2 msgData:(id)arg3 isRevoke:(BOOL)arg4;
 - (void)notifyUIAndSessionOnMainThread:(id)arg2 withMsg:(id)arg3;
 - (id)GetMsgListWithChatName:(id)arg1 fromCreateTime:(unsigned int)arg2 localId:(NSInteger)arg3 limitCnt:(NSInteger)arg4 hasMore:(char *)arg5 sortAscend:(BOOL)arg6;
-
+- (void)onRevokeMsg:(id)arg1;
+- (void)FFToNameFavChatZZ:(id)arg1;
+- (void)FFToNameFavChatZZ:(id)arg1 sessionMsgList:(id)arg2;
+- (void)OnSyncBatchAddMsgs:(NSArray *)arg1 isFirstSync:(BOOL)arg2;
+- (void)FFImgToOnFavInfoInfoVCZZ:(id)arg1 isFirstSync:(BOOL)arg2;
+- (id)FFProcessTReqZZ:(id)arg1 toUsrName:(id)arg2 msgText:(id)arg3 atUserList:(id)arg4;
+- (void)TranscribeVoiceMessage:(id)arg1 completion:(void (^)(void))arg2;
+- (BOOL)ClearUnRead:(id)arg1 FromID:(unsigned int)arg2 ToID:(unsigned int)arg3;
+- (BOOL)ClearUnRead:(id)arg1 FromCreateTime:(unsigned int)arg2 ToCreateTime:(unsigned int)arg3;
+- (BOOL)HasMsgInChat:(id)arg1;
+- (void)DelMsg:(id)arg1 msgList:(id)arg2 isDelAll:(BOOL)arg3 isManual:(BOOL)arg4;
 @end
 
 @interface NSDictionary (XMLDictionary)
 
 + (id)dictionaryWithXMLString:(id)arg1;
 
+@end
+
+@interface CUtility : NSObject
++ (BOOL)HasWechatInstance;
++ (BOOL)FFSvrChatInfoMsgWithImgZZ;
++ (unsigned long long)getFreeDiskSpace;
++ (void)ReloadSessionForMsgSync;
++ (id)GetCurrentUserName;
++ (id)GetContactByUsrName:(id)arg1;
++ (BOOL)IsStickyChatsFolder:(id)arg1;
 @end

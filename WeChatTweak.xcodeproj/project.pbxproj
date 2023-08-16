@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BB8CC0E2A8CEBB2003CD6C7 /* TKMessageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BB8CC0C2A8CEBB2003CD6C7 /* TKMessageManager.h */; };
+		0BB8CC0F2A8CEBB2003CD6C7 /* TKMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8CC0D2A8CEBB2003CD6C7 /* TKMessageManager.m */; };
 		7D14E5A41F6447DB00D75132 /* Alfred.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D14E5A21F6447DB00D75132 /* Alfred.h */; };
 		7D14E5A51F6447DB00D75132 /* Alfred.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D14E5A31F6447DB00D75132 /* Alfred.m */; };
 		7D2194CC264701950068F4CC /* AntiRevoke.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2194CA264701950068F4CC /* AntiRevoke.m */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0BB8CC0C2A8CEBB2003CD6C7 /* TKMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMessageManager.h; sourceTree = "<group>"; };
+		0BB8CC0D2A8CEBB2003CD6C7 /* TKMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMessageManager.m; sourceTree = "<group>"; };
 		153504EC5C9196C0D85213CF /* libPods-WeChatTweak.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeChatTweak.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D14E5A21F6447DB00D75132 /* Alfred.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alfred.h; sourceTree = "<group>"; };
 		7D14E5A31F6447DB00D75132 /* Alfred.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alfred.m; sourceTree = "<group>"; };
@@ -73,6 +77,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0BB8CC0B2A8CEB90003CD6C7 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				0BB8CC0C2A8CEBB2003CD6C7 /* TKMessageManager.h */,
+				0BB8CC0D2A8CEBB2003CD6C7 /* TKMessageManager.m */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		785C3947774E235ED4EB5A14 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +162,7 @@
 				7D64150627A9469900A8A398 /* ContextMenu.m */,
 				7D14E5A21F6447DB00D75132 /* Alfred.h */,
 				7D14E5A31F6447DB00D75132 /* Alfred.m */,
+				0BB8CC0B2A8CEB90003CD6C7 /* Managers */,
 				7D5AAF3720DF4BB300860EEE /* Vendor */,
 				7D5AAF3620DF4BA400860EEE /* Category */,
 				7D5AAF3520DF4B9700860EEE /* Controller */,
@@ -185,6 +199,7 @@
 				7DF8422C1F40583F00D42D79 /* WeChatTweak.h in Headers */,
 				7DF8425B1F4058DD00D42D79 /* NSBundle+WeChatTweak.h in Headers */,
 				7D9049F61F82A41A004E6370 /* fishhook.h in Headers */,
+				0BB8CC0E2A8CEBB2003CD6C7 /* TKMessageManager.h in Headers */,
 				7D14E5A41F6447DB00D75132 /* Alfred.h in Headers */,
 				7DF842601F40590500D42D79 /* WeChatTweakHeaders.h in Headers */,
 				7DF842521F4058C600D42D79 /* TweakPreferencesController.h in Headers */,
@@ -310,6 +325,7 @@
 			files = (
 				7D14E5A51F6447DB00D75132 /* Alfred.m in Sources */,
 				7DF842531F4058C600D42D79 /* TweakPreferencesController.m in Sources */,
+				0BB8CC0F2A8CEBB2003CD6C7 /* TKMessageManager.m in Sources */,
 				7D64150827A9469900A8A398 /* ContextMenu.m in Sources */,
 				7D2194CC264701950068F4CC /* AntiRevoke.m in Sources */,
 				7DF842341F4058AB00D42D79 /* WeChatTweak.m in Sources */,
