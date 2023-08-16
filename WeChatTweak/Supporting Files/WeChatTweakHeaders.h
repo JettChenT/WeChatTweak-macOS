@@ -189,6 +189,7 @@ typedef NS_ENUM(unsigned int, MessageDataType) {
 - (void)notifyModMsgOnMainThread:(id)arg2 msgData:(id)arg3;
 - (void)notifyDelMsgOnMainThread:(id)arg2 msgData:(id)arg3 isRevoke:(BOOL)arg4;
 - (void)notifyUIAndSessionOnMainThread:(id)arg2 withMsg:(id)arg3;
+- (id)GetMsgListWithChatName:(id)arg1 fromCreateTime:(unsigned int)arg2 localId:(NSInteger)arg3 limitCnt:(NSInteger)arg4 hasMore:(char *)arg5 sortAscend:(BOOL)arg6;
 
 @end
 

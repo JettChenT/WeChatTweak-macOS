@@ -119,6 +119,46 @@
         });
         return [GCDWebServerResponse responseWithStatusCode:200];
     }];
+    [self.server addHandlerForMethod:@"GET" path:@"/wechat/chatlog" requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse * _Nullable(__kindof GCDWebServerRequest * _Nonnull request) {
+        FFProcessReqsvrZZ *service = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("FFProcessReqsvrZZ")];
+        char hasMore = '1';
+        NSArray *array = @[];
+        NSString *userId = request.query ? request.query[@"userId"] ? request.query[@"userId"] : nil : nil;
+        NSInteger count = request.query ? request.query[@"count"] ? [request.query[@"count"] integerValue] : 30 : 30;
+        
+        if ([service respondsToSelector:@selector(GetMsgListWithChatName:fromCreateTime:localId:limitCnt:hasMore:sortAscend:)]) {
+            array = [service GetMsgListWithChatName:userId fromCreateTime:0 localId:0 limitCnt:count hasMore:&hasMore sortAscend:YES];
+        }
+        NSMutableArray<NSDictionary<NSString *, id> *> *chatLogItems = [NSMutableArray array];
+                
+                for (MessageData *message in array) {
+                    NSString *content = message.msgContent;
+                    NSString *toUser = message.toUsrName;
+                    NSString *fromUser = message.fromUsrName;
+                    unsigned int createTime = message.msgCreateTime;
+                    BOOL isSentFromSelf = [message isSendFromSelf];
+                    
+                    // Depending on the message type, we may want to adapt content
+                    switch (message.messageType) {
+                        // Assuming some enums or constants for MessageDataType
+                        // case MessageDataTypeImage:
+                        //     content = [message savingImageFileNameWithLocalID];
+                        //     break;
+                        default:
+                            break;
+                    }
+                    
+                    [chatLogItems addObject:@{
+                        @"content": content ? content : NSNull.null,
+                        @"toUser": toUser ? toUser : NSNull.null,
+                        @"fromUser": fromUser ? fromUser : NSNull.null,
+                        @"createTime": @(createTime),
+                        @"isSentFromSelf": @(isSentFromSelf)
+                        // Add other relevant fields as necessary
+                    }];
+                }
+                return [GCDWebServerDataResponse responseWithJSONObject:@{@"chatLogs": chatLogItems, @"hasMore": @(hasMore == '1')}];
+        }];
     [self.server startWithOptions:@{
         GCDWebServerOption_Port: @(48065),
         GCDWebServerOption_BindToLocalhost: @(YES)
