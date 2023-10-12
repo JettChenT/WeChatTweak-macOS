@@ -9,7 +9,7 @@ DEPENDENCIES:
   - JRSwizzle
 
 SPEC REPOS:
-  trunk:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - GCDWebServer
     - JRSwizzle
 
@@ -17,6 +17,6 @@ SPEC CHECKSUMS:
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
 
-PODFILE CHECKSUM: fd46001624206b8e49574ff77cbc6e5c54a12e7d
+PODFILE CHECKSUM: ddb54ce6d07b87967dd67e482d88bb4373121e8f
 
 COCOAPODS: 1.12.1
